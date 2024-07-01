@@ -62,15 +62,6 @@ public class Spaceship : UdonSharpBehaviour
 
     void HandleForce()
     {
-        // When space key is pressed, the spaceship receives force upwards
-        // (relative to the spaceship, hence the `transform.rotation *`) on
-        // acceleration mode (continuous, mass-independent)
-        if (Input.GetKey(KeyCode.Space))
-        {
-            ApplyForce(transform.rotation * Vector3.up * engineForce);
-            return;
-        }
-
         // When shift key is pressed, the spaceship receives force forward
         // in a similar way to the space key behaviour.
         if (Input.GetKey(KeyCode.LeftShift))
