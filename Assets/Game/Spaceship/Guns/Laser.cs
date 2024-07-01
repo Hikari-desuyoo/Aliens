@@ -8,9 +8,11 @@ public class Laser : Gun
 {
     public LineRenderer lineRenderer;
     public Transform laserPointer;
+    public ParticleSystem smoke;
     public float speed;
     public float fadeSpeed;
     public float reach;
+    public int smokeAmount;
 
     public override void OnShootingFixed()
     {
@@ -65,7 +67,13 @@ public class Laser : Gun
             var laserEndPosition = lineRenderer.GetPosition(1);
             laserEndPosition.z = hit.distance;
             lineRenderer.SetPosition(1, laserEndPosition);
+
+            // release smoke particles and position
+            // on world position of laser ending point
+            smoke.Emit(smokeAmount);
+            smoke.transform.position = GetLaserEndPoint();
         }
+
     }
 
     float GetLaserDistance()
@@ -77,9 +85,14 @@ public class Laser : Gun
             lineRenderer.transform.TransformPoint(
                 lineRenderer.GetPosition(0)
             ),
-            lineRenderer.transform.TransformPoint(
-                lineRenderer.GetPosition(1)
-            )
+            GetLaserEndPoint()
+        );
+    }
+
+    Vector3 GetLaserEndPoint()
+    {
+        return lineRenderer.transform.TransformPoint(
+            lineRenderer.GetPosition(1)
         );
     }
 }
