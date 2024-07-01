@@ -11,6 +11,7 @@ public class Spaceship : UdonSharpBehaviour
 
     public float engineForce;
     public float engineRotationalForce;
+    public Gun gun;
 
     // How much force is used for stabilization
     // 0 means 0% of engineForce
@@ -22,6 +23,22 @@ public class Spaceship : UdonSharpBehaviour
     // but relative to engineRotationalForce
     public float rotationalStabilization;
     private Rigidbody _rb;
+
+    // Shoots gun if trigger/mouse button is pressed
+    public override void InputUse(bool value, VRC.Udon.Common.UdonInputEventArgs args) {
+        var shootingValue = true;
+
+        if (
+            gun == null || // no gun or...
+            !localPlayerUsing || // no local player on ship or...
+            !value // not even pressing the button means...
+        )
+        {
+            shootingValue = false; // won't shoot!
+        };
+
+        gun.shooting = shootingValue;
+    }
 
     void Start()
     {
@@ -43,7 +60,7 @@ public class Spaceship : UdonSharpBehaviour
         HandleTorque();
     }
 
-    private void HandleForce()
+    void HandleForce()
     {
         // When space key is pressed, the spaceship receives force upwards
         // (relative to the spaceship, hence the `transform.rotation *`) on
@@ -69,7 +86,7 @@ public class Spaceship : UdonSharpBehaviour
 
     // Applies angular force to spin the ship based
     // on user input
-    private void HandleTorque()
+    void HandleTorque()
     {
         if (Input.GetKey(KeyCode.Q))
         {
@@ -112,13 +129,13 @@ public class Spaceship : UdonSharpBehaviour
         ApplyTorque(-_rb.angularVelocity.normalized * engineRotationalForce * rotationalStabilization);
     }
 
-    private void ApplyTorque(Vector3 torque)
+    void ApplyTorque(Vector3 torque)
     {
         // ForceMode.Force means continuous force, considering mass
         _rb.AddTorque(torque, ForceMode.Force);
     }
 
-    private void ApplyForce(Vector3 torque)
+    void ApplyForce(Vector3 torque)
     {
         // ForceMode.Force means continuous force, considering mass
         _rb.AddForce(torque, ForceMode.Force);
