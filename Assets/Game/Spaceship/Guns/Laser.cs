@@ -76,21 +76,24 @@ public class Laser : Gun
             // the number 20 comes from 20 being
             // the max emission on poiyomi
 
-            var enemy = hit.collider.gameObject.GetComponent<Enemy>();
-            if(enemy != null)
+            if (hit.collider != null)
             {
-                enemy.GetShot(damage);
-                var emissionStrength = enemy.renderer.material.GetFloat("_EmissionStrength");
-                enemy.renderer.material.SetFloat(
-                    "_EmissionStrength",
-                    emissionStrength + 20f * damage / enemy.maxHp
-                );
+                var enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if(enemy != null)
+                {
+                    enemy.GetShot(damage);
+                    var emissionStrength = enemy.renderer.material.GetFloat("_EmissionStrength");
+                    enemy.renderer.material.SetFloat(
+                        "_EmissionStrength",
+                        emissionStrength + 20f * damage / enemy.maxHp
+                    );
+                }
             }
 
             // release smoke particles and position
             // on world position of laser ending point
-            smoke.Emit(smokeAmount);
             smoke.transform.position = GetLaserEndPoint();
+            smoke.Emit(smokeAmount);
         }
 
     }
