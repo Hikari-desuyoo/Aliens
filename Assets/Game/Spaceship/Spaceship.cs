@@ -49,10 +49,7 @@ public class Spaceship : UdonSharpBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    // FixedUpdate is called instead of Update to prevent
-    // different behaviours based on the players fps, e.g.
-    // engine force appearing stronger or weaker
-    void FixedUpdate()
+    void Update()
     {
         // We only want to handle spaceship movement for the
         // local player. Each client will deal with their own
@@ -68,23 +65,32 @@ public class Spaceship : UdonSharpBehaviour
         // When shift key is pressed, the spaceship receives force forward
         // in a similar way to the space key behaviour. The acceleration
         // gradually increases based on a curve, just like real engines!
-
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            _accelerationTime++;
-            if(_stabilizationTime > 0) _stabilizationTime -= 1;
-            ApplyForce(transform.rotation * Vector3.forward * engineForce.Evaluate(_accelerationTime));
+            _accelerationTime += Time.deltaTime;
+            if(_stabilizationTime > 0) _stabilizationTime -= Time.deltaTime;
+            ApplyForce(
+                transform.rotation *
+                Vector3.forward *
+                engineForce.Evaluate(_accelerationTime) *
+                Time.deltaTime
+            );
             return;
         } else {
             // we diminish the time gradually instead of
             // resetting altogether to be more realistic
             // if the player accelerate again
-            if(_accelerationTime > 0) _accelerationTime -= 1;
+            if(_accelerationTime > 0) _accelerationTime -= Time.deltaTime;
 
             // Stabilize force
             // when it is not being controlled by user
-            _stabilizationTime++;
-            ApplyForce(-_rb.velocity.normalized * engineForce.Evaluate(_stabilizationTime) * stabilization);
+            _stabilizationTime += Time.deltaTime;
+            ApplyForce(
+                -_rb.velocity.normalized *
+                engineForce.Evaluate(_stabilizationTime) *
+                stabilization *
+                Time.deltaTime
+            );
         }
     }
 
@@ -115,7 +121,7 @@ public class Spaceship : UdonSharpBehaviour
             force = engineRotationalForce * rotationalStabilization;
         }
 
-        ApplyTorque(torqueDirection * force);
+        ApplyTorque(torqueDirection * force * Time.deltaTime);
     }
 
     void ApplyTorque(Vector3 torque)

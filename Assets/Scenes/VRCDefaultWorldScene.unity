@@ -21813,8 +21813,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 5.285072
-      value: 18894.518
+      time: 0.4275508
+      value: 993358.75
       inSlope: 1145.6681
       outSlope: 1145.6681
       tangentMode: 0
@@ -21822,8 +21822,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.34473002
     - serializedVersion: 3
-      time: 10.076958
-      value: 20131.742
+      time: 1.036644
+      value: 1000852.06
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21833,10 +21833,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  engineRotationalForce: 10000
-  gun: {fileID: 1012956626}
+  engineRotationalForce: 1000000
+  gun: {fileID: 173456430}
   stabilization: 0.9
-  rotationalStabilization: 1
+  rotationalStabilization: 2
 --- !u!114 &1400355385
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -27487,8 +27487,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 5.285072
-      value: 18894.518
+      time: 0.4275508
+      value: 993358.75
       inSlope: 1145.6681
       outSlope: 1145.6681
       tangentMode: 0
@@ -27496,8 +27496,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.34473002
     - serializedVersion: 3
-      time: 10.076958
-      value: 20131.742
+      time: 1.036644
+      value: 1000852.06
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -27507,10 +27507,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  engineRotationalForce: 10000
+  engineRotationalForce: 1000000
   gun: {fileID: 173456430}
   stabilization: 0.9
-  rotationalStabilization: 1
+  rotationalStabilization: 2
 --- !u!114 &1860132600
 MonoBehaviour:
   m_ObjectHideFlags: 0
