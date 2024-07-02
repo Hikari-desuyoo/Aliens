@@ -13,6 +13,7 @@ public class Laser : Gun
     public float fadeSpeed;
     public float reach;
     public int smokeAmount;
+    public float emissionRate;
 
     public override void OnShootingFixed()
     {
@@ -67,6 +68,24 @@ public class Laser : Gun
             var laserEndPosition = lineRenderer.GetPosition(1);
             laserEndPosition.z = hit.distance;
             lineRenderer.SetPosition(1, laserEndPosition);
+
+            // actually transfer damage if its an enemy
+            // also make it brighter! the amount of
+            // brightness is defined in a way that
+            // is relative to the enemy health
+            // the number 20 comes from 20 being
+            // the max emission on poiyomi
+
+            var enemy = hit.collider.gameObject.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.GetShot(damage);
+                var emissionStrength = enemy.renderer.material.GetFloat("_EmissionStrength");
+                enemy.renderer.material.SetFloat(
+                    "_EmissionStrength",
+                    emissionStrength + 20f * damage / enemy.maxHp
+                );
+            }
 
             // release smoke particles and position
             // on world position of laser ending point

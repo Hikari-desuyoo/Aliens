@@ -7,6 +7,7 @@ using VRC.Udon;
 public class Gun : UdonSharpBehaviour
 {
     public bool shooting = false;
+    public int damage = 2;
 
     // These are called every frame, depending if gun is being shot or not
     public virtual void OnShooting()
