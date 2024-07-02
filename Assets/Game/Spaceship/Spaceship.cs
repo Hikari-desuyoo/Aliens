@@ -9,7 +9,7 @@ public class Spaceship : UdonSharpBehaviour
     // Defined by a script listening to the VRCStation events
     public bool localPlayerUsing = false;
 
-    public float engineForce;
+    public AnimationCurve engineForce;
     public float engineRotationalForce;
     public Gun gun;
 
@@ -23,6 +23,9 @@ public class Spaceship : UdonSharpBehaviour
     // but relative to engineRotationalForce
     public float rotationalStabilization;
     private Rigidbody _rb;
+    private float _accelerationTime = 0;
+    private float _stabilizationTime = 0;
+    private float _rotationTime = 0;
 
     // Shoots gun if trigger/mouse button is pressed
     public override void InputUse(bool value, VRC.Udon.Common.UdonInputEventArgs args) {
@@ -63,61 +66,56 @@ public class Spaceship : UdonSharpBehaviour
     void HandleForce()
     {
         // When shift key is pressed, the spaceship receives force forward
-        // in a similar way to the space key behaviour.
+        // in a similar way to the space key behaviour. The acceleration
+        // gradually increases based on a curve, just like real engines!
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            ApplyForce(transform.rotation * Vector3.forward * engineForce);
+            _accelerationTime++;
+            if(_stabilizationTime > 0) _stabilizationTime -= 1;
+            ApplyForce(transform.rotation * Vector3.forward * engineForce.Evaluate(_accelerationTime));
             return;
-        }
+        } else {
+            // we diminish the time gradually instead of
+            // resetting altogether to be more realistic
+            // if the player accelerate again
+            if(_accelerationTime > 0) _accelerationTime -= 1;
 
-        // Stabilize force
-        // when it is not being controlled by user
-        ApplyForce(-_rb.velocity.normalized * engineForce * stabilization);
+            // Stabilize force
+            // when it is not being controlled by user
+            _stabilizationTime++;
+            ApplyForce(-_rb.velocity.normalized * engineForce.Evaluate(_stabilizationTime) * stabilization);
+        }
     }
 
     // Applies angular force to spin the ship based
     // on user input
     void HandleTorque()
     {
+        Vector3 torqueDirection;
+        float force = engineRotationalForce;
+
         if (Input.GetKey(KeyCode.Q))
+            torqueDirection = transform.rotation * Vector3.forward;
+        else if (Input.GetKey(KeyCode.E))
+            torqueDirection = transform.rotation * -Vector3.forward;
+        else if (Input.GetKey(KeyCode.A))
+            torqueDirection = transform.rotation * -Vector3.up;
+        else if (Input.GetKey(KeyCode.D))
+            torqueDirection = transform.rotation * Vector3.up;
+        else if (Input.GetKey(KeyCode.S))
+            torqueDirection = transform.rotation * -Vector3.right;
+        else if (Input.GetKey(KeyCode.W))
+            torqueDirection = transform.rotation * Vector3.right;
+        else
         {
-            ApplyTorque(transform.rotation * Vector3.forward * engineRotationalForce);
-            return;
+            // Stabilize angular motion
+            // when it is not being controlled by user
+            torqueDirection = -_rb.angularVelocity.normalized;
+            force = engineRotationalForce * rotationalStabilization;
         }
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            ApplyTorque(transform.rotation * -Vector3.forward * engineRotationalForce);
-            return;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            ApplyTorque(transform.rotation * -Vector3.up * engineRotationalForce);
-            return;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            ApplyTorque(transform.rotation * Vector3.up * engineRotationalForce);
-            return;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            ApplyTorque(transform.rotation * -Vector3.right * engineRotationalForce);
-            return;
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            ApplyTorque(transform.rotation * Vector3.right * engineRotationalForce);
-            return;
-        }
-
-        // Stabilize angular motion
-        // when it is not being controlled by user
-        ApplyTorque(-_rb.angularVelocity.normalized * engineRotationalForce * rotationalStabilization);
+        ApplyTorque(torqueDirection * force);
     }
 
     void ApplyTorque(Vector3 torque)
@@ -131,4 +129,6 @@ public class Spaceship : UdonSharpBehaviour
         // ForceMode.Force means continuous force, considering mass
         _rb.AddForce(torque, ForceMode.Force);
     }
+
+
 }
