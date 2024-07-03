@@ -13,7 +13,7 @@ public class Laser : Gun
     public float fadeSpeed;
     public float reach;
     public int smokeAmount;
-    public float emissionRate;
+    private float _smokeTimer = 0f;
 
     void FixedUpdate()
     {
@@ -70,11 +70,12 @@ public class Laser : Gun
                 var enemy = hit.collider.gameObject.GetComponent<Enemy>();
                 if(enemy != null)
                 {
-                    enemy.GetShot(damage);
+                    var targetDamage = damage * Time.fixedDeltaTime;
+                    enemy.GetShot(targetDamage);
                     var emissionStrength = enemy.renderer.material.GetFloat("_EmissionStrength");
                     enemy.renderer.material.SetFloat(
                         "_EmissionStrength",
-                        emissionStrength + 20f * damage / enemy.maxHp
+                        emissionStrength + 20f * targetDamage / enemy.maxHp
                     );
                 }
             }
@@ -82,9 +83,11 @@ public class Laser : Gun
             // release smoke particles and position
             // on world position of laser ending point
             smoke.transform.position = GetLaserEndPoint();
-            smoke.Emit(smokeAmount);
+            _smokeTimer += Time.fixedDeltaTime;
+            var smokeAmountCurrent = (int) (_smokeTimer * smokeAmount);
+            smoke.Emit(smokeAmountCurrent);
+            _smokeTimer -= smokeAmountCurrent / (float) smokeAmount;
         }
-
     }
 
     float GetLaserDistance()

@@ -6,13 +6,13 @@ using VRC.Udon;
 
 public class Enemy : UdonSharpBehaviour
 {
-    public int maxHp = 10;
+    public float maxHp = 10f;
     public Renderer renderer;
     public ParticleSystem particles;
     public GameObject ship;
-    private int _hp = 10;
+    private float _hp = 10f;
 
-    public void GetShot(int damage)
+    public void GetShot(float damage)
     {
         var targetHp = _hp - damage;
         if (targetHp <= 0)
