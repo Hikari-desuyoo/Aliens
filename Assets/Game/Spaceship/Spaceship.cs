@@ -49,7 +49,7 @@ public class Spaceship : UdonSharpBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void PostLateUpdate()
     {
         // We only want to handle spaceship movement for the
         // local player. Each client will deal with their own
@@ -100,6 +100,8 @@ public class Spaceship : UdonSharpBehaviour
     {
         Vector3 torqueDirection;
         float force = engineRotationalForce;
+
+        // this should allow multiple keys at same time
 
         if (Input.GetKey(KeyCode.Q))
             torqueDirection = transform.rotation * Vector3.forward;
