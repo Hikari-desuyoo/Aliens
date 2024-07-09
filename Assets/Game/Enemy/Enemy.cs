@@ -20,16 +20,14 @@ public class Enemy : UdonSharpBehaviour
             targetHp = 0;
             ship.gameObject.SetActive(false);
             particles.gameObject.SetActive(true);
+            SendCustomEventDelayedSeconds("Die", 5, VRC.Udon.Common.Enums.EventTiming.Update);
         }
         _hp = targetHp;
     }
 
-    void Update()
+    void Die()
     {
-        if (particles.gameObject.activeInHierarchy && !particles.IsAlive()) {
-            // Resets enemy for it to go back to the pool
-            particles.gameObject.SetActive(false);
-            gameObject.SetActive(false);
-        }
+        particles.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
