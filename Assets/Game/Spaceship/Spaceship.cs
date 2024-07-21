@@ -12,6 +12,8 @@ public class Spaceship : UdonSharpBehaviour
     public AnimationCurve engineForce;
     public float engineRotationalForce;
     public Gun gun;
+    public Controller leftController;
+    public Controller rightController;
 
     // How much force is used for stabilization
     // 0 means 0% of engineForce
@@ -55,6 +57,8 @@ public class Spaceship : UdonSharpBehaviour
         // local player. Each client will deal with their own
         // spaceship and then sync the transform
         if(!localPlayerUsing) return;
+
+        Debug.Log($"pitch {Controller.GetPitch(leftController, rightController, this)} / yaw {Controller.GetYaw(leftController, rightController, this)} / roll {Controller.GetRoll(leftController, rightController, this)}");
 
         HandleForce();
         HandleTorque();
