@@ -11,11 +11,12 @@ public class Controller : UdonSharpBehaviour
     Quaternion _restRotation;
     bool _moveToOrigin = false;
 
-    public static float GetDistance(Controller left, Controller right)
+    public static float GetAcceleration(Controller left, Controller right)
     {
         // localPosition to avoid flickering during fast spaceship movement
-        return Vector3.Distance(left.transform.localPosition, right.transform.localPosition);
+        return Vector3.Distance(transform.localPosition, right.transform.localPosition);
     }
+
     public static float GetPitch(Controller left, Controller right, Spaceship spaceship)
     {
         return (left.GetRotation() + right.GetRotation()) / 2;

@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - BSSBLOOMFOGTYPE_HEIGHT
+  - POI_EMISSION_1
   - VIGNETTE_MASKED
   - _LIGHTINGMODE_FLAT
   - _RIM2STYLE_POIYOMI
@@ -25,8 +26,10 @@ Material:
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
+    _AlphaFresnelAlphaAnimated: 1
+    _AlphaFresnelSharpnessAnimated: 1
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _MainVertexColoringEnabled
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -195,11 +198,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8417c3e48961d874ea489c5665044e2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMask1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8417c3e48961d874ea489c5665044e2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMask2:
@@ -235,11 +238,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlitterColorMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8417c3e48961d874ea489c5665044e2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlitterMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8417c3e48961d874ea489c5665044e2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlitterTexture:
@@ -603,20 +606,20 @@ Material:
     - _AddBlendOpAlpha: 4
     - _AddDstBlend: 1
     - _AddDstBlendAlpha: 1
-    - _AddSrcBlend: 5
+    - _AddSrcBlend: 1
     - _AddSrcBlendAlpha: 0
     - _Add_Antipodean_Rim2Light: 0
     - _Add_Antipodean_RimLight: 0
     - _AlphaAlphaAdd: 0
     - _AlphaAngular: 0
-    - _AlphaAngularGlobalMask: 0
+    - _AlphaAngularGlobalMask: 16
     - _AlphaAudioLinkAddBand: 0
     - _AlphaAudioLinkEnabled: 0
-    - _AlphaBoostFA: 10
+    - _AlphaBoostFA: 1
     - _AlphaColorThemeIndex: 0
-    - _AlphaDistanceFade: 0
+    - _AlphaDistanceFade: 1
     - _AlphaDistanceFadeGlobalMask: 0
-    - _AlphaDistanceFadeMax: 0
+    - _AlphaDistanceFadeMax: 6
     - _AlphaDistanceFadeMaxAlpha: 1
     - _AlphaDistanceFadeMin: 0
     - _AlphaDistanceFadeMinAlpha: 0
@@ -625,26 +628,26 @@ Material:
     - _AlphaDitherGradient: 0.1
     - _AlphaDithering: 0
     - _AlphaForceOpaque: 0
-    - _AlphaFresnel: 0
-    - _AlphaFresnelAlpha: 0
+    - _AlphaFresnel: 1
+    - _AlphaFresnelAlpha: 1
     - _AlphaFresnelGlobalMask: 0
-    - _AlphaFresnelInvert: 0
-    - _AlphaFresnelSharpness: 0.5
-    - _AlphaFresnelWidth: 0.5
+    - _AlphaFresnelInvert: 1
+    - _AlphaFresnelSharpness: 0.145
+    - _AlphaFresnelWidth: 1
     - _AlphaGlobalMask: 0
     - _AlphaGlobalMaskBlendType: 2
-    - _AlphaMaskInvert: 1
+    - _AlphaMaskInvert: 0
     - _AlphaMaskScale: 1
-    - _AlphaMaskUV: 8
+    - _AlphaMaskUV: 0
     - _AlphaMaskValue: 0
     - _AlphaMipScale: 0.25
-    - _AlphaMod: -0.78
-    - _AlphaPremultiply: 0
+    - _AlphaMod: -0.03
+    - _AlphaPremultiply: 1
     - _AlphaSharpenedA2C: 0
     - _AlphaTextureStochastic: 0
     - _AlphaTextureUV: 0
     - _AlphaToCoverage: 0
-    - _AngleCompareTo: 0
+    - _AngleCompareTo: 1
     - _AngleMinAlpha: 0
     - _AngleType: 0
     - _Aniso0Blur: 0
@@ -825,8 +828,8 @@ Material:
     - _BumpMapUV: 0
     - _BumpScale: 1
     - _CCIgnoreCastedShadows: 0
-    - _CameraAngleMax: 90
-    - _CameraAngleMin: 45
+    - _CameraAngleMax: 16
+    - _CameraAngleMin: 0
     - _CenterOutDissolveInvert: 0
     - _CenterOutDissolveMode: 1
     - _CenterOutDissolveNormals: 0
@@ -901,7 +904,7 @@ Material:
     - _CurvatureU: 0
     - _CurvatureV: 0
     - _CustomColors: 0
-    - _Cutoff: 0.002
+    - _Cutoff: 0
     - _Decal0ApplyGlobalMaskBlendType: 0
     - _Decal0ApplyGlobalMaskIndex: 0
     - _Decal0ChannelSeparation: 0
@@ -1178,7 +1181,7 @@ Material:
     - _EmissionAL3MultipliersBand: 0
     - _EmissionAL3StrengthBand: 0
     - _EmissionBaseColorAsMap: 0
-    - _EmissionBaseColorAsMap1: 0
+    - _EmissionBaseColorAsMap1: 1
     - _EmissionBaseColorAsMap2: 0
     - _EmissionBaseColorAsMap3: 0
     - _EmissionBlinkingEnabled: 0
@@ -1257,8 +1260,8 @@ Material:
     - _EmissionScrollingVertexColor1: 0
     - _EmissionScrollingVertexColor2: 0
     - _EmissionScrollingVertexColor3: 0
-    - _EmissionStrength: 0.4
-    - _EmissionStrength1: 0
+    - _EmissionStrength: 20
+    - _EmissionStrength1: 1.3
     - _EmissionStrength2: 0
     - _EmissionStrength3: 0
     - _EmissiveBlink_Max: 1
@@ -1295,7 +1298,7 @@ Material:
     - _EnableDistortion: 0
     - _EnableDistortionAudioLink: 0
     - _EnableEmission: 0
-    - _EnableEmission1: 0
+    - _EnableEmission1: 1
     - _EnableEmission2: 0
     - _EnableEmission3: 0
     - _EnableEnvironmentalRim: 0
@@ -1394,13 +1397,13 @@ Material:
     - _GlitterAngleRange: 90
     - _GlitterBias: 0.8
     - _GlitterBlendType: 0
-    - _GlitterBrightness: 3
+    - _GlitterBrightness: 1
     - _GlitterCenterSize: 0.08
     - _GlitterColorMapUV: 0
     - _GlitterColorThemeIndex: 0
     - _GlitterContrast: 300
     - _GlitterEnable: 0
-    - _GlitterFrequency: 300
+    - _GlitterFrequency: 100
     - _GlitterHideInShadow: 0
     - _GlitterHueShift: 0
     - _GlitterHueShiftEnabled: 0
@@ -1412,18 +1415,18 @@ Material:
     - _GlitterMaskGlobalMaskBlendType: 2
     - _GlitterMaskInvert: 0
     - _GlitterMaskUV: 0
-    - _GlitterMinBrightness: 0
-    - _GlitterMode: 0
+    - _GlitterMinBrightness: 1
+    - _GlitterMode: 1
     - _GlitterRandomColors: 0
     - _GlitterRandomLocation: 1
     - _GlitterRandomRotation: 0
     - _GlitterRandomSize: 0
     - _GlitterScaleWithLighting: 0
     - _GlitterShape: 0
-    - _GlitterSize: 0.3
-    - _GlitterSpeed: 10
+    - _GlitterSize: 0.689
+    - _GlitterSpeed: 0
     - _GlitterTextureRotation: 0
-    - _GlitterUV: 0
+    - _GlitterUV: 1
     - _GlitterUseNormals: 0
     - _GlitterUseSurfaceColor: 0
     - _GlobalMaskBackface_0: 0
@@ -2024,9 +2027,9 @@ Material:
     - _MochieSpecularStrengthGlobalMask: 0
     - _MochieSpecularStrengthGlobalMaskBlendType: 2
     - _MochieSpecularTintThemeIndex: 0
-    - _Mode: 2
-    - _ModelAngleMax: 90
-    - _ModelAngleMin: 45
+    - _Mode: 3
+    - _ModelAngleMax: 22
+    - _ModelAngleMin: 0
     - _MultilayerMathBlurMapUV: 0
     - _NormalCorrect: 0
     - _NormalCorrectAmount: 0.9
@@ -2060,7 +2063,7 @@ Material:
     - _OutlineRimLightBlend: 0
     - _OutlineShadowStrength: 0
     - _OutlineSpace: 0
-    - _OutlineSrcBlend: 5
+    - _OutlineSrcBlend: 1
     - _OutlineSrcBlendAlpha: 1
     - _OutlineStencilBackCompareFunction: 8
     - _OutlineStencilBackFailOp: 0
@@ -2441,7 +2444,7 @@ Material:
     - _SphericalDissolveClamp: 0
     - _SphericalDissolveInvert: 0
     - _SphericalDissolveRadius: 1.5
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _SssBumpBlur: 0.7
     - _SssScale: 1
@@ -2800,7 +2803,7 @@ Material:
     - m_specialFXCategory: 1
     - m_start_ALDecalSpectrum: 0
     - m_start_ALVolumeColor: 0
-    - m_start_Alpha: 0
+    - m_start_Alpha: 1
     - m_start_Aniso: 0
     - m_start_BeatsaberBloomFog: 0
     - m_start_BeatsaberOptions: 0
@@ -3138,10 +3141,10 @@ Material:
     - s_start_ALVertexGlitching: 0
     - s_start_ALVertexHeight: 0
     - s_start_AlphaAdvanced: 1
-    - s_start_AlphaAngular: 0
+    - s_start_AlphaAngular: 1
     - s_start_AlphaDistanceFade: 1
     - s_start_AlphaDithering: 0
-    - s_start_AlphaFresnel: 0
+    - s_start_AlphaFresnel: 1
     - s_start_AlphaToCoverage: 1
     - s_start_AnisoBottomLayer: 0
     - s_start_AnisoTopLayer: 1
@@ -3218,7 +3221,7 @@ Material:
     - s_start_GlitterAudioLink: 0
     - s_start_GlitterColorAndShape: 1
     - s_start_GlitterHueShiftSection: 0
-    - s_start_GlitterMask: 0
+    - s_start_GlitterMask: 1
     - s_start_GlitterPositionSize: 1
     - s_start_GlitterRotationSection: 0
     - s_start_GlitterSparkleControl: 1
@@ -3348,9 +3351,9 @@ Material:
     - _ALVolumeColorMid: {r: 0, g: 1, b: 0, a: 1}
     - _AlphaAudioLinkAddRange: {r: 0, g: 0, b: 0, a: 1}
     - _AlphaColor: {r: 1, g: 1, b: 1, a: 1}
-    - _AlphaMaskPan: {r: 0, g: 9, b: 0, a: 0}
+    - _AlphaMaskPan: {r: 0.21, g: 0, b: 0, a: 0}
     - _AlphaTexturePan: {r: 0, g: 0, b: 0, a: 0}
-    - _AngleForwardDirection: {r: 0, g: 0, b: 1, a: 1}
+    - _AngleForwardDirection: {r: 0, g: 1, b: 1, a: 1}
     - _Aniso0Tint: {r: 1, g: 1, b: 1, a: 1}
     - _Aniso1Tint: {r: 1, g: 1, b: 1, a: 1}
     - _AnisoColorMapPan: {r: 0, g: 0, b: 0, a: 0}
@@ -3436,7 +3439,7 @@ Material:
     - _ClearCoatReflectionTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClearCoatSpecularTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClothMetallicSmoothnessMapPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 1, b: 0.026485443, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.5292978, a: 1}
     - _CubeMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _CubeMapMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _CubeMapRotation: {r: 0, g: 0, b: 0, a: 0}
@@ -3491,8 +3494,8 @@ Material:
     - _EmissionAL2StrengthMod: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionAL3Multipliers: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionAL3StrengthMod: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 2.5591922, g: 4, b: 2.4716983, a: 1}
-    - _EmissionColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0.44676918, g: 0.8394245, b: 0.42367184, a: 1}
+    - _EmissionColor1: {r: 0.9816965, g: 1.7411011, b: 0.9608907, a: 1}
     - _EmissionColor2: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor3: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionMap1Pan: {r: 0, g: 0, b: 0, a: 0}
@@ -3518,14 +3521,14 @@ Material:
     - _GlitterALAlphaAdd: {r: 0, g: 0, b: 0, a: 0}
     - _GlitterALMaxBrightnessAdd: {r: 0, g: 0, b: 0, a: 0}
     - _GlitterALSizeAdd: {r: 0, g: 0, b: 0, a: 0}
-    - _GlitterColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlitterColor: {r: 0.05219716, g: 3.5795565, b: 3.688606, a: 1}
     - _GlitterColorMapPan: {r: 0, g: 0, b: 0, a: 0}
     - _GlitterMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _GlitterMinMaxBrightness: {r: 0.8, g: 1, b: 0, a: 1}
     - _GlitterMinMaxSaturation: {r: 0.8, g: 1, b: 0, a: 1}
     - _GlitterMinMaxSize: {r: 0.1, g: 0.5, b: 0, a: 1}
     - _GlitterRandomRotationSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _GlitterUVPanning: {r: 0, g: 0, b: 0, a: 0}
+    - _GlitterUVPanning: {r: 0, g: 0.93, b: 0, a: 0}
     - _GlobalMaskMinMaxSlider_0: {r: 0, g: 1, b: 0, a: 1}
     - _GlobalMaskMinMaxSlider_1: {r: 0, g: 1, b: 0, a: 1}
     - _GlobalMaskMinMaxSlider_10: {r: 0, g: 1, b: 0, a: 1}
