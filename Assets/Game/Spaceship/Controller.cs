@@ -14,7 +14,12 @@ public class Controller : UdonSharpBehaviour
     public static float GetAcceleration(Controller left, Controller right)
     {
         // localPosition to avoid flickering during fast spaceship movement
-        return Vector3.Distance(transform.localPosition, right.transform.localPosition);
+        var distance = Vector3.Distance(left.transform.localPosition, right.transform.localPosition);
+        var min = 0.5f;
+        var max = 0.9f;
+        distance = Mathf.Clamp(distance, min, max);
+
+        return (distance - min) / (max - min);
     }
 
     public static float GetPitch(Controller left, Controller right, Spaceship spaceship)
@@ -53,7 +58,6 @@ public class Controller : UdonSharpBehaviour
     {
         var angle = 360 - transform.localRotation.eulerAngles.z + 90;
         angle %= 180;
-        Debug.Log(angle);
         return (angle / 180) * 2 - 1;
     }
 
@@ -70,6 +74,6 @@ public class Controller : UdonSharpBehaviour
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, _restPosition, speed * Time.deltaTime);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, _restRotation, speed * Time.deltaTime);
-        _moveToOrigin = Vector3.Distance(transform.localPosition, _restPosition) > 0.1f;
+        _moveToOrigin = Vector3.Distance(transform.localPosition, _restPosition) > 0.01f;
     }
 }

@@ -28,6 +28,7 @@ public class Spaceship : UdonSharpBehaviour
     private float _accelerationTime = 0;
     private float _stabilizationTime = 0;
     private float _rotationTime = 0;
+    private bool _vr = false;
 
     // Shoots gun if trigger/mouse button is pressed
     public override void InputUse(bool value, VRC.Udon.Common.UdonInputEventArgs args) {
@@ -49,6 +50,8 @@ public class Spaceship : UdonSharpBehaviour
     {
         // Caching components is good practice!
         _rb = GetComponent<Rigidbody>();
+        _vr = Networking.LocalPlayer.IsUserInVR();
+        _vr = true;
     }
 
     void PostLateUpdate()
@@ -57,8 +60,6 @@ public class Spaceship : UdonSharpBehaviour
         // local player. Each client will deal with their own
         // spaceship and then sync the transform
         if(!localPlayerUsing) return;
-
-        Debug.Log($"pitch {Controller.GetPitch(leftController, rightController, this)} / yaw {Controller.GetYaw(leftController, rightController, this)} / roll {Controller.GetRoll(leftController, rightController, this)}");
 
         HandleForce();
         HandleTorque();
@@ -69,7 +70,12 @@ public class Spaceship : UdonSharpBehaviour
         // When shift key is pressed, the spaceship receives force forward
         // in a similar way to the space key behaviour. The acceleration
         // gradually increases based on a curve, just like real engines!
-        if (Input.GetKey(KeyCode.LeftShift))
+
+        var acceleration = 0f;
+        if(_vr) acceleration = Controller.GetAcceleration(leftController, rightController);
+        if(Input.GetKey(KeyCode.LeftShift)) acceleration = 1f;
+
+        if (acceleration > 0)
         {
             _accelerationTime += Time.deltaTime;
             if(_stabilizationTime > 0) _stabilizationTime -= Time.deltaTime;
@@ -102,27 +108,39 @@ public class Spaceship : UdonSharpBehaviour
     // on user input
     void HandleTorque()
     {
-        Vector3 torqueDirection;
         float force = engineRotationalForce;
 
-        // this should allow multiple keys at same time
+        var pitch = 0f;
+        var yaw = 0f;
+        var roll = 0f;
 
-        if (Input.GetKey(KeyCode.Q))
-            torqueDirection = transform.rotation * Vector3.forward;
-        else if (Input.GetKey(KeyCode.E))
-            torqueDirection = transform.rotation * -Vector3.forward;
-        else if (Input.GetKey(KeyCode.A))
-            torqueDirection = transform.rotation * -Vector3.up;
-        else if (Input.GetKey(KeyCode.D))
-            torqueDirection = transform.rotation * Vector3.up;
-        else if (Input.GetKey(KeyCode.S))
-            torqueDirection = transform.rotation * -Vector3.right;
-        else if (Input.GetKey(KeyCode.W))
-            torqueDirection = transform.rotation * Vector3.right;
-        else
+        if (_vr)
         {
-            // Stabilize angular motion
-            // when it is not being controlled by user
+            pitch = Controller.GetPitch(leftController, rightController, this);
+            yaw = Controller.GetYaw(leftController, rightController, this);
+            roll = Controller.GetRoll(leftController, rightController, this);
+        }
+
+        if (Input.GetKey(KeyCode.Q)) roll = 1;
+        if (Input.GetKey(KeyCode.E)) roll = -1;
+        if (Input.GetKey(KeyCode.A)) yaw = -1;
+        if (Input.GetKey(KeyCode.D)) yaw = 1;
+        if (Input.GetKey(KeyCode.S)) pitch = -1;
+        if (Input.GetKey(KeyCode.W)) pitch = 1;
+
+        var torqueDirection =
+            transform.rotation *
+            (
+                Vector3.forward * roll +
+                Vector3.up * yaw +
+                Vector3.right * pitch
+            );
+
+        // Stabilize angular motion
+        // when it is not being controlled by user
+        if (torqueDirection == Vector3.zero)
+        {
+            // Stabilize angular motion when it is not being controlled by user
             torqueDirection = -_rb.angularVelocity.normalized;
             force = engineRotationalForce * rotationalStabilization;
         }
