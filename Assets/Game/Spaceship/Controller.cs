@@ -22,24 +22,24 @@ public class Controller : UdonSharpBehaviour
         return (distance - min) / (max - min);
     }
 
-    public static float GetPitch(Controller left, Controller right, Spaceship spaceship)
+    public static float GetPitch(Controller left, Controller right)
     {
         return (left.GetRotation() + right.GetRotation()) / 2;
     }
 
-    public static float GetYaw(Controller left, Controller right, Spaceship spaceship)
+    public static float GetYaw(Controller left, Controller right)
     =>
-    GetAxis(left, right, spaceship, Quaternion.Euler(0, -90, 0));
+    GetAxis(left, right, Vector3.right);
 
-    public static float GetRoll(Controller left, Controller right, Spaceship spaceship)
+    public static float GetRoll(Controller left, Controller right)
     =>
-    GetAxis(left, right, spaceship, Quaternion.Euler(-90, 0, 0));
+    GetAxis(left, right, Vector3.up);
 
-    public static float GetAxis(Controller left, Controller right, Spaceship spaceship, Quaternion rotation)
+    public static float GetAxis(Controller left, Controller right, Vector3 axis)
     {
         var angle = Vector3.Angle(
             left.transform.localPosition - right.transform.localPosition,
-            rotation * spaceship.transform.forward
+            axis
         );
         return (angle / 180) * 2 - 1;
     }

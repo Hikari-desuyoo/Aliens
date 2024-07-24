@@ -51,7 +51,6 @@ public class Spaceship : UdonSharpBehaviour
         // Caching components is good practice!
         _rb = GetComponent<Rigidbody>();
         _vr = Networking.LocalPlayer.IsUserInVR();
-        _vr = true;
     }
 
     void PostLateUpdate()
@@ -116,9 +115,9 @@ public class Spaceship : UdonSharpBehaviour
 
         if (_vr)
         {
-            pitch = Controller.GetPitch(leftController, rightController, this);
-            yaw = Controller.GetYaw(leftController, rightController, this);
-            roll = Controller.GetRoll(leftController, rightController, this);
+            pitch = Controller.GetPitch(leftController, rightController);
+            yaw = Controller.GetYaw(leftController, rightController);
+            roll = Controller.GetRoll(leftController, rightController);
         }
 
         if (Input.GetKey(KeyCode.Q)) roll = 1;

@@ -8,10 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StearingWheel
-  m_Shader: {fileID: 4800000, guid: 68d4032c05798c44eafe02f272e6895c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 80e97e44f7d05214f970f5472ff5a044, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - BSSBLOOMFOGTYPE_HEIGHT
   - FINALPASS
   - MOCHIE_PBR
@@ -20,12 +21,17 @@ Material:
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
   - _STOCHASTICMODE_DELIOT_HEITZ
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
   stringTagMap:
+    AllLockedGUIDS: cba098e633cdbc44092c8971b7dd254b
+    OriginalKeywords: BSSBLOOMFOGTYPE_HEIGHT FINALPASS MOCHIE_PBR VIGNETTE_MASKED
+      _LIGHTINGMODE_REALISTIC _RIM2STYLE_POIYOMI _RIMSTYLE_POIYOMI _STOCHASTICMODE_DELIOT_HEITZ
+    OriginalShader: .poiyomi/Poiyomi Toon World
+    OriginalShaderGUID: 68d4032c05798c44eafe02f272e6895c
+    RenderType: Opaque
     _MochieMetallicMaps_texPack_a_channel: 4
     _MochieMetallicMaps_texPack_a_fallback: 1
     _MochieMetallicMaps_texPack_a_inverted: False
@@ -2417,7 +2423,7 @@ Material:
     - _Set_RimLightMaskChannel: 1
     - _Set_RimLightMaskUV: 0
     - _ShadeColor_Step: 0
-    - _ShaderOptimizerEnabled: 0
+    - _ShaderOptimizerEnabled: 1
     - _ShaderUIWarning0: -0
     - _ShaderUIWarning1: -0
     - _ShadingEnabled: 1

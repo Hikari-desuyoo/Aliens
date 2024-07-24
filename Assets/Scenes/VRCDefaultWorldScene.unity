@@ -22412,10 +22412,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  engineRotationalForce: 1000000
+  engineRotationalForce: 500000
   gun: {fileID: 173456430}
-  leftController: {fileID: 20268299}
-  rightController: {fileID: 598557124}
+  leftController: {fileID: 598557124}
+  rightController: {fileID: 20268299}
   stabilization: 0.9
   rotationalStabilization: 2
 --- !u!114 &1860132600
@@ -22962,16 +22962,20 @@ MonoBehaviour:
   useAssignedLayers: 0
   DynamicPrefabs: []
   DynamicMaterials:
-  - {fileID: -3721627217944437473, guid: 616557db4b7ef404f8cbf584667d8e9b, type: 3}
-  - {fileID: -7841686778889784441, guid: 616557db4b7ef404f8cbf584667d8e9b, type: 3}
+  - {fileID: 2100000, guid: f8a9d803ed21ad3419b59b73554375c9, type: 2}
+  - {fileID: 2100000, guid: cba098e633cdbc44092c8971b7dd254b, type: 2}
+  - {fileID: 2100000, guid: c800ba4e97395b44f932028b7fd59b60, type: 2}
   - {fileID: 2100000, guid: c116d89ee74192d4290a4ccbee71f609, type: 2}
+  - {fileID: 2100000, guid: a58912036fc415e4987393a686f87ab4, type: 2}
+  - {fileID: 2100000, guid: e6adc33e0a990e54aa58a127bbb1604e, type: 2}
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: 54751012b84ce1a4c849998638172f24, type: 2}
-  - {fileID: 4576395899905000009, guid: 616557db4b7ef404f8cbf584667d8e9b, type: 3}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   - {fileID: 2100000, guid: 177e690fd1e6aa0498737d3fec56393a, type: 2}
   - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 2100000, guid: 4fb983dacbe07b3498410a419b53594d, type: 2}
   - {fileID: 2100000, guid: 5dcf88c99e12c944fa8d2ac0e060f9b8, type: 2}
+  - {fileID: 2100000, guid: 3564d6a56be55ca46978c9d9fbcca0ce, type: 2}
+  - {fileID: 2100000, guid: 54751012b84ce1a4c849998638172f24, type: 2}
   LightMapsNear: []
   LightMapsFar: []
   LightMode: 0
@@ -23029,18 +23033,6 @@ MonoBehaviour:
     ID: 10
     SerializedTypeNames:
     - VRC.Udon.UdonBehaviour
-  - gameObject: {fileID: 0}
-    ID: 11
-    SerializedTypeNames:
-    - VRC.Udon.UdonBehaviour
-  - gameObject: {fileID: 0}
-    ID: 12
-    SerializedTypeNames:
-    - VRC.Udon.UdonBehaviour
-  - gameObject: {fileID: 0}
-    ID: 13
-    SerializedTypeNames:
-    - VRC.Udon.UdonBehaviour
   - gameObject: {fileID: 1029775616}
     ID: 14
     SerializedTypeNames:
@@ -23072,6 +23064,26 @@ MonoBehaviour:
     ID: 20
     SerializedTypeNames:
     - VRC.Udon.UdonBehaviour
+  - gameObject: {fileID: 569197525}
+    ID: 21
+    SerializedTypeNames:
+    - VRC.Udon.UdonBehaviour
+  - gameObject: {fileID: 1947564844}
+    ID: 22
+    SerializedTypeNames:
+    - VRC.Udon.UdonBehaviour
+  - gameObject: {fileID: 598557106}
+    ID: 23
+    SerializedTypeNames:
+    - VRC.SDK3.Components.VRCPickup
+    - VRC.SDK3.Components.VRCObjectSync
+    - VRC.Udon.UdonBehaviour
+  - gameObject: {fileID: 20268295}
+    ID: 24
+    SerializedTypeNames:
+    - VRC.Udon.UdonBehaviour
+    - VRC.SDK3.Components.VRCPickup
+    - VRC.SDK3.Components.VRCObjectSync
   portraitCameraPositionOffset: {x: 0, y: 0, z: 0}
   portraitCameraRotationOffset: {x: 0, y: 1, z: 0, w: -0.00000004371139}
 --- !u!1660057539 &9223372036854775807
