@@ -24,7 +24,10 @@ public class Controller : UdonSharpBehaviour
 
     public static float GetPitch(Controller left, Controller right)
     {
-        return (left.GetRotation() + right.GetRotation()) / 2;
+        var result = -(left.GetRotation() + right.GetRotation()) / 2;
+        if(result > -0.1 && result < 0.1) return 0f;
+
+        return result;
     }
 
     public static float GetYaw(Controller left, Controller right)

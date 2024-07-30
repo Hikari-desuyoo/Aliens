@@ -51,6 +51,7 @@ public class Spaceship : UdonSharpBehaviour
         // Caching components is good practice!
         _rb = GetComponent<Rigidbody>();
         _vr = Networking.LocalPlayer.IsUserInVR();
+        _vr = true;
     }
 
     void PostLateUpdate()
@@ -60,7 +61,7 @@ public class Spaceship : UdonSharpBehaviour
         // spaceship and then sync the transform
         if(!localPlayerUsing) return;
 
-        HandleForce();
+        // HandleForce();
         HandleTorque();
     }
 
