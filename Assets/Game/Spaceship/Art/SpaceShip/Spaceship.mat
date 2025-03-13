@@ -8,11 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Spaceship
-  m_Shader: {fileID: 4800000, guid: c7b7f41598a1e87458c60d82b234d7fc, type: 3}
+  m_Shader: {fileID: 4800000, guid: 68d4032c05798c44eafe02f272e6895c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - BSSBLOOMFOGTYPE_HEIGHT
   - FINALPASS
   - MOCHIE_PBR
@@ -24,15 +23,15 @@ Material:
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
   - _STOCHASTICMODE_DELIOT_HEITZ
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
   stringTagMap:
-    AllLockedGUIDS: a58912036fc415e4987393a686f87ab4
-    OriginalKeywords: BSSBLOOMFOGTYPE_HEIGHT FINALPASS MOCHIE_PBR POI_CLEARCOAT VIGNETTE_MASKED
-      _EMISSION _GLOSSYREFLECTIONS_OFF _LIGHTINGMODE_REALISTIC _RIM2STYLE_POIYOMI
-      _RIMSTYLE_POIYOMI _STOCHASTICMODE_DELIOT_HEITZ
+    OriginalKeywords: BSSBLOOMFOGTYPE_HEIGHT COLOR_GRADING_HDR FINALPASS MOCHIE_PBR
+      POI_CLEARCOAT VIGNETTE_MASKED _EMISSION _GLOSSYREFLECTIONS_OFF _LIGHTINGMODE_REALISTIC
+      _RIM2STYLE_POIYOMI _RIMSTYLE_POIYOMI _STOCHASTICMODE_DELIOT_HEITZ
     OriginalShader: .poiyomi/Poiyomi Toon World
     OriginalShaderGUID: 68d4032c05798c44eafe02f272e6895c
     RenderType: Opaque
@@ -49,6 +48,7 @@ Material:
     _MochieMetallicMaps_texPack_r_channel: 4
     _MochieMetallicMaps_texPack_r_fallback: 1
     _MochieMetallicMaps_texPack_r_inverted: False
+    _SaturationAnimated: 1
   disabledShaderPasses: []
   m_LockedProperties: _MainVertexColoringEnabled
   m_SavedProperties:
@@ -2415,7 +2415,7 @@ Material:
     - _SSSThicknessMapChannel: 0
     - _SSSThicknessMapUV: 0
     - _SSSThicknessMod: -1
-    - _Saturation: 0
+    - _Saturation: 3.74
     - _ScrollingEmission: 0
     - _ScrollingEmission1: 0
     - _ScrollingEmission2: 0
@@ -2427,7 +2427,7 @@ Material:
     - _Set_RimLightMaskChannel: 1
     - _Set_RimLightMaskUV: 0
     - _ShadeColor_Step: 0
-    - _ShaderOptimizerEnabled: 1
+    - _ShaderOptimizerEnabled: 0
     - _ShaderUIWarning0: -0
     - _ShaderUIWarning1: -0
     - _ShadingEnabled: 1
@@ -3162,11 +3162,11 @@ Material:
     - s_start_ALVertexGlitching: 0
     - s_start_ALVertexHeight: 0
     - s_start_AlphaAdvanced: 0
-    - s_start_AlphaAngular: 0
-    - s_start_AlphaDistanceFade: 0
-    - s_start_AlphaDithering: 0
-    - s_start_AlphaFresnel: 0
-    - s_start_AlphaToCoverage: 0
+    - s_start_AlphaAngular: 1
+    - s_start_AlphaDistanceFade: 1
+    - s_start_AlphaDithering: 1
+    - s_start_AlphaFresnel: 1
+    - s_start_AlphaToCoverage: 1
     - s_start_AnisoBottomLayer: 0
     - s_start_AnisoTopLayer: 1
     - s_start_AudioLinkBandOverrides: 1

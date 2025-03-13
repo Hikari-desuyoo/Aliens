@@ -9,6 +9,8 @@ public class Spaceship : UdonSharpBehaviour
     // Defined by a script listening to the VRCStation events
     public bool localPlayerUsing = false;
 
+    public AnimationCurve vrTorqueInput;
+    public AnimationCurve vrForceInput;
     public AnimationCurve engineForce;
     public float engineRotationalForce;
     public Gun gun;
@@ -28,7 +30,7 @@ public class Spaceship : UdonSharpBehaviour
     private float _accelerationTime = 0;
     private float _stabilizationTime = 0;
     private float _rotationTime = 0;
-    private bool _vr = false;
+    private bool _useVrControls = false;
 
     // Shoots gun if trigger/mouse button is pressed
     public override void InputUse(bool value, VRC.Udon.Common.UdonInputEventArgs args) {
@@ -50,8 +52,6 @@ public class Spaceship : UdonSharpBehaviour
     {
         // Caching components is good practice!
         _rb = GetComponent<Rigidbody>();
-        _vr = Networking.LocalPlayer.IsUserInVR();
-        _vr = true;
     }
 
     void PostLateUpdate()
@@ -60,8 +60,9 @@ public class Spaceship : UdonSharpBehaviour
         // local player. Each client will deal with their own
         // spaceship and then sync the transform
         if(!localPlayerUsing) return;
+        _useVrControls = leftController.IsBeingHolded() && rightController.IsBeingHolded();
 
-        // HandleForce();
+        HandleForce();
         HandleTorque();
     }
 
@@ -72,7 +73,10 @@ public class Spaceship : UdonSharpBehaviour
         // gradually increases based on a curve, just like real engines!
 
         var acceleration = 0f;
-        if(_vr) acceleration = Controller.GetAcceleration(leftController, rightController);
+        if(_useVrControls) acceleration = vrForceInput.Evaluate(
+            Controller.GetForceInput(leftController, rightController)
+        );
+
         if(Input.GetKey(KeyCode.LeftShift)) acceleration = 1f;
 
         if (acceleration > 0)
@@ -114,11 +118,11 @@ public class Spaceship : UdonSharpBehaviour
         var yaw = 0f;
         var roll = 0f;
 
-        if (_vr)
+        if (_useVrControls)
         {
-            pitch = Controller.GetPitch(leftController, rightController);
-            yaw = Controller.GetYaw(leftController, rightController);
-            roll = Controller.GetRoll(leftController, rightController);
+            pitch = EvaluateSigned(vrTorqueInput, Controller.GetPitch(leftController, rightController));
+            yaw = EvaluateSigned(vrTorqueInput, Controller.GetYaw(leftController, rightController));
+            roll = EvaluateSigned(vrTorqueInput, Controller.GetRoll(leftController, rightController));
         }
 
         if (Input.GetKey(KeyCode.Q)) roll = 1;
@@ -160,5 +164,9 @@ public class Spaceship : UdonSharpBehaviour
         _rb.AddForce(torque, ForceMode.Force);
     }
 
-
+    float EvaluateSigned(AnimationCurve curve, float x)
+    {
+        var value = curve.Evaluate(Mathf.Abs(x));
+        return x < 0 ? -value : value;
+    }
 }

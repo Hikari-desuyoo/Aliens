@@ -10,35 +10,31 @@ public class Controller : UdonSharpBehaviour
     Vector3 _restPosition;
     Quaternion _restRotation;
     bool _moveToOrigin = false;
+    bool _holded = false;
 
-    public static float GetAcceleration(Controller left, Controller right)
+    public static float GetForceInput(Controller left, Controller right)
     {
         // localPosition to avoid flickering during fast spaceship movement
-        var distance = Vector3.Distance(left.transform.localPosition, right.transform.localPosition);
-        var min = 0.5f;
-        var max = 0.9f;
-        distance = Mathf.Clamp(distance, min, max);
-
-        return (distance - min) / (max - min);
+        return Vector3.Distance(left.transform.localPosition, right.transform.localPosition);
     }
 
     public static float GetPitch(Controller left, Controller right)
-    {
-        var result = -(left.GetRotation() + right.GetRotation()) / 2;
-        if(result > -0.1 && result < 0.1) return 0f;
-
-        return result;
-    }
+    =>
+    -GetRotation(left, right, 2);
 
     public static float GetYaw(Controller left, Controller right)
     =>
-    GetAxis(left, right, Vector3.right);
+    (-GetRotation(left, right, 1) + GetAngle(left, right, Vector3.right)) / 2;
 
     public static float GetRoll(Controller left, Controller right)
     =>
-    GetAxis(left, right, Vector3.up);
+    (GetRotation(left, right, 0) + GetAngle(left, right, Vector3.up)) / 2;
 
-    public static float GetAxis(Controller left, Controller right, Vector3 axis)
+    public static float GetRotation(Controller left, Controller right, int i)
+    =>
+    left.GetRotation(i) + right.GetRotation(i) / 2;
+
+    public static float GetAngle(Controller left, Controller right, Vector3 axis)
     {
         var angle = Vector3.Angle(
             left.transform.localPosition - right.transform.localPosition,
@@ -50,26 +46,29 @@ public class Controller : UdonSharpBehaviour
     public override void OnPickup()
     {
         _moveToOrigin = false;
+        _holded = true;
     }
 
     public override void OnDrop()
     {
         _moveToOrigin = true;
+        _holded = false;
     }
 
-    public float GetRotation()
+    public float GetRotation(int i)
     {
-        var angle = 360 - transform.localRotation.eulerAngles.z + 90;
+        var angle = 360 - transform.localRotation.eulerAngles[i] + 90;
         angle %= 180;
         return (angle / 180) * 2 - 1;
     }
+
+    public bool IsBeingHolded() => _holded;
 
     void Start()
     {
         _restPosition = transform.localPosition;
         _restRotation = transform.localRotation;
     }
-
 
     void Update()
     {

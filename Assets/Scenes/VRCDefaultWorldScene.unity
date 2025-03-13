@@ -22379,6 +22379,63 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1860132598}
   localPlayerUsing: 0
+  vrTorqueInput:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3998612
+      value: 0.15988894
+      inSlope: 0.7997223
+      outSlope: 0.7997223
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vrForceInput:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: 0.011661199
+      outSlope: 0.011661199
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.3226096
+    - serializedVersion: 3
+      time: 1.5
+      value: 1
+      inSlope: 2.8180127
+      outSlope: 2.8180127
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07141268
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   engineForce:
     serializedVersion: 2
     m_Curve:
